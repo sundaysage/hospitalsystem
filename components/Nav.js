@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { useState } from "react";
 
 
 const Nav = () => {
@@ -19,6 +20,9 @@ const Nav = () => {
 
         <Link href="/">
           <p>Login</p>
+        </Link>
+        <Link href="./patientreg">
+          <p>Signup</p>
         </Link>
       </div>
     </div>
