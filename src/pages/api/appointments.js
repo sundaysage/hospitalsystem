@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         "https://sage-hospital.onrender.com/api/v1/appointments",
         {
           headers: {
-            Authorization: `Basic ${credentials}`,
+            Authorization:"Bearer" + accessToken ,
           },
         }
       );
