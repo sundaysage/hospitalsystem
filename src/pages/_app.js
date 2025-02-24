@@ -1,5 +1,11 @@
 import "@/styles/globals.css";
-
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+import { AuthProvider } from "../../components/Auth";
+function MyApp({ Component, pageProps }) {
+  return (
+    <AuthProvider>  {/* AuthProvider wraps the ENTIRE app */}
+      <Component {...pageProps} />
+    </AuthProvider>
+  );
 }
+
+export default MyApp;

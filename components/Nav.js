@@ -18,7 +18,7 @@ const Nav = () => {
           <p>Pharmacy</p>
         </Link>
 
-        <Link href="/">
+        <Link href="/patientlogin">
           <p>Login</p>
         </Link>
         <Link href="./patientreg">
