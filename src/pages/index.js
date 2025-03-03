@@ -10,7 +10,6 @@ import Section3 from "../../components/Section3";
 export default function Home() {
   return (
     <div className="bg-sky-100">
-      <Nav />
       <section className="sm:flex sm:w-full">
         <div className="flex sm:w-4/5 sm:m-auto sm:justify-around sm:items-center sm:h-v-v ">
           <div className="sm:w-2/5 flex sm:flex-col ">

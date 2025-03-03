@@ -1,10 +1,8 @@
 import React from 'react'
-import Nav from '../../components/Nav'
 
 const pharmacy = () => {
   return (
     <div>
-        <Nav/>
         <div className=''>
             <h1>
                 We bring the Pharmacy to <br/>

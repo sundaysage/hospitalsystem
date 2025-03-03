@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { AuthProvider } from "../../components/Auth";
+import { useAuth } from "../../components/Auth";
 
 export default function Appointments() {
   const [appointments, setAppointments] = useState([]);
-  console.log("🚀 ~ Appointments ~ appointments:", appointments)
+  console.log("🚀 ~ Appointments ~ appointments:", appointments);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { user } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
+    if (!user && !loading) {
+      // Redirect if not logged in AND not currently checking
+      router.push("/patientlogin");
+    }
+
     async function fetchAppointments() {
       try {
         const token = localStorage.getItem("token"); // Get token from localStorage
@@ -35,7 +45,7 @@ export default function Appointments() {
     }
 
     fetchAppointments();
-  }, []);
+  }, [user,loading , router]);
 
   if (loading) return <p>Loading appointments...</p>;
   if (error) return <p>Error: {error.message}</p>;
