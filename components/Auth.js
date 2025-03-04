@@ -32,6 +32,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (userData) => {
+    setLoading(true);
     try {
       const response = await fetch(
         "https://sage-hospital.onrender.com/api/v1/auth/patient-login",

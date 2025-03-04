@@ -1,9 +1,19 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
 
 const Section2a = () => {
   return (
+    
+    
+      <motion.div
+      initial={{ opacity: 0 }} // Initial state (invisible)
+      animate={{ opacity: 1 }} // Final state (fully visible)
+      transition={{ duration: 4 }} // Animation duration
+      
+    >
     <div className="bg-blue-900 w-full sm:h-vs flex ">
       <div className="bg-blue-500 opacity-80 sm:h-5/6 sm:w-9/12 m-auto sm:flex text-sm text-white p-3">
         <div className=" w-3/6 flex flex-col justify-around">
@@ -58,6 +68,7 @@ const Section2a = () => {
         </div>
       </div>
     </div>
+      </motion.div>
   );
 };
 

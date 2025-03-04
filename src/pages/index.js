@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import Nav from "../../components/Nav";
 import doc from "../../public/doc.jpg";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Section2 from "../../components/Section2";
 import Ourmission from "../../components/Ourmission";
 import Section2a from "../../components/Section2a";
@@ -10,6 +11,12 @@ import Section3 from "../../components/Section3";
 export default function Home() {
   return (
     <div className="bg-sky-100">
+       <motion.div
+        initial={{ opacity: 0 }} // Initial state (invisible)
+        animate={{ opacity: 1 }} // Final state (fully visible)
+        transition={{ duration: 4 }} // Animation duration
+        
+      >
       <section className="sm:flex sm:w-full">
         <div className="flex sm:w-4/5 sm:m-auto sm:justify-around sm:items-center sm:h-v-v ">
           <div className="sm:w-2/5 flex sm:flex-col ">
@@ -27,10 +34,14 @@ export default function Home() {
 
             <div className=" flex justify-between mt-3 w-5/6 ">
               <Link href="/">
-                <div className=" border border-black p-1 rounded">Make an Appopointment</div>
+                <div className=" border border-black p-1 rounded">
+                  Make an Appopointment
+                </div>
               </Link>
               <Link href="/">
-                <div className="border border-black p-1 rounded">Find a Doctor </div>
+                <div className="border border-black p-1 rounded">
+                  Find a Doctor{" "}
+                </div>
               </Link>
             </div>
           </div>
@@ -44,13 +55,15 @@ export default function Home() {
             />
           </div>
         </div>
-      </section>
-      <Ourmission/>
-      <Section2/>
-      <Section2a/>
-      <Section3/>
-      
+      </section>{" "}
+     
+       
 
+      </motion.div>
+      <Ourmission />
+      <Section2 />
+      <Section2a />
+      <Section3 />
     </div>
   );
 }
