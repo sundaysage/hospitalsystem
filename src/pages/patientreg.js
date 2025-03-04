@@ -1,166 +1,191 @@
-import React from "react";
-import { useState } from "react";
-import Router, { useRouter } from "next/router";
+"use client"; // Required for Next.js App Router
 
+import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
-const patientreg = () => {
+const PatientReg = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
+    phoneNumber: "",
+    address: "",
+    profileImage: null,
   });
+
+  const [imagePreview, setImagePreview] = useState(null);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData({ ...formData, profileImage: file });
+      setImagePreview(URL.createObjectURL(file)); // Show preview
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true during API call
-    setError(null); // Clear any previous errors
-    setSuccessMessage(null); // Clear any previous success messages
+    setLoading(true);
+    setError(null);
+    setSuccessMessage(null);
+
+    const formDataToSend = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      formDataToSend.append(key, value);
+    });
 
     try {
       const response = await fetch(
         "https://sage-hospital.onrender.com/api/v1/auth/patient-register",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
+          body: formDataToSend,
         }
       );
 
       if (!response.ok) {
-        const errorData = await response.json(); // Try to parse error response
-        throw new Error(errorData.message || "Signup failed"); // Display error message from API or generic message
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Signup failed");
       }
 
       const data = await response.json();
-      console.log("Signup successful:", data);
-      setSuccessMessage("Signup successful! You can now log in.");
-      setFormData({
-        // Clear form after successful submission
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-      });
-      setTimeout(() => {  // Use setTimeout for a small delay
-        router.push('/patientlogin'); // Redirect to the login page
+      setSuccessMessage("Signup successful! Redirecting...");
+      setTimeout(() => {
+        router.push("/patientlogin");
       }, 2000);
     } catch (err) {
-      console.error("Signup error:", err);
-      setError(err.message); // Set error message to display
+      setError(err.message);
     } finally {
-      setLoading(false); // Set loading to false after API call, regardless of success or failure
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+    <div className="flex items-center justify-center min-h-screen bg-[#e0f2fe] px-4 pt-16">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold text-center text-[#0c4a6e] mb-6">
+          Patient Sign Up
+        </h2>
 
-        {error && <div className="text-red-500 mb-4">{error}</div>}
-        {successMessage && ( <div className="text-green-500 mb-4">{successMessage}</div>
+        {/* Error & Success Messages */}
+        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        {successMessage && (
+          <p className="text-green-500 text-center mb-4">{successMessage}</p>
         )}
 
-        <form onSubmit={handleSubmit}>
-          {/* ... (Input fields - see below) */}
-          <div className="mb-4">
-            <label
-              htmlFor="firstName"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              First Name
-            </label>
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Profile Image Upload */}
+          <div className="flex flex-col items-center">
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Profile Preview"
+                className="w-24 h-24 rounded-full mb-2 object-cover border border-gray-300"
+              />
+            )}
             <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-blue-500"
-              required
-            />
-          </div>
-          {/* ... (Other input fields) */}
-
-          <div className="mb-4">
-            <label
-              htmlFor="lastName"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Last Name
-            </label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-blue-500"
-              required
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full p-2 border rounded-lg focus:outline-none"
             />
           </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-blue-500"
-              required
-            />
-          </div>
+          {/* First Name */}
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            value={formData.firstName}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0c4a6e]"
+          />
 
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 font-bold mb-2"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-blue-500"
-              required
-            />
-          </div>
+          {/* Last Name */}
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0c4a6e]"
+          />
 
+          {/* Email */}
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0c4a6e]"
+          />
 
-          <button
+          {/* Phone Number */}
+          <input
+            type="tel"
+            name="phoneNumber"
+            placeholder="Phone Number"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0c4a6e]"
+          />
+
+          {/* Address */}
+          <textarea
+            name="address"
+            placeholder="Address"
+            value={formData.address}
+            onChange={handleChange}
+            required
+            rows="2"
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0c4a6e]"
+          />
+
+          {/* Password */}
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0c4a6e]"
+          />
+
+          {/* Submit Button */}
+          <motion.button
             type="submit"
             disabled={loading}
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-              loading ? "opacity-50 cursor-not-allowed" : ""
+            whileHover={!loading ? { scale: 1.05 } : {}}
+            whileTap={!loading ? { scale: 0.95 } : {}}
+            className={`w-full py-3 rounded-lg text-lg font-semibold transition-all ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-[#0c4a6e] text-white"
             }`}
           >
             {loading ? "Signing Up..." : "Sign Up"}
-          </button>
+          </motion.button>
         </form>
       </div>
     </div>
   );
 };
 
-export default patientreg;
+export default PatientReg;
