@@ -59,7 +59,7 @@ const NavLinks = ({ onClick }) => (
   <div className="flex flex-col md:flex-row md:space-x-6">
     {[
       { href: "/", label: "Home" },
-      { href: "/find-doctor", label: "Find Doctor" },
+      { href: "/", label: "Find Doctor" },
       { href: "/pharmacy", label: "Pharmacy" },
       { href: "/patientlogin", label: "Login" },
       { href: "/patientreg", label: "Signup" },
