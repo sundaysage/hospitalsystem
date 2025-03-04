@@ -87,7 +87,7 @@ const IDCardPDF = ({ user }) => (
 
         {/* ✅ Profile Image */}
         <View style={styles.profileContainer}>
-          <Image src={user.profileImage || "/default-profile.png"} style={styles.profileImage} />
+          <Image alt="pro" src={user.profileImage || "/default-profile.png"} style={styles.profileImage} />
         </View>
 
         {/* ✅ User Details (Grid Layout for Better Spacing) */}

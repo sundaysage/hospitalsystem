@@ -35,7 +35,7 @@ const Section2a = () => {
               <Image alt="mm" src='' />
               <h1>Fill The Form </h1>
               <p>
-                In this article  `we'll` discuss the basics of screen
+                In this article  `we will` discuss the basics of screen
                 resolution,responsive design
               </p>
             </div>
@@ -43,7 +43,7 @@ const Section2a = () => {
               <Image alt="mm" src='' />
               <h1>Fill The Form </h1>
               <p>
-                In this article  `we'll` discuss the basics of screen
+                In this article  `we will` discuss the basics of screen
                 resolution,responsive design
               </p>
             </div>
@@ -51,7 +51,7 @@ const Section2a = () => {
               <Image alt="mm" src='' />
               <h1>Fill The Form </h1>
               <p>
-                In this article  `we'll` discuss the basics of screen
+                In this article  `we will` discuss the basics of screen
                 resolution,responsive design
               </p>
             </div>
@@ -59,7 +59,7 @@ const Section2a = () => {
               <Image alt="mm" src='' />
               <h1>Fill The Form </h1>
               <p>
-                In this article  `we'll` discuss the basics of screen
+                In this article  `we will` discuss the basics of screen
                 resolution,responsive design
               </p>
             </div>
