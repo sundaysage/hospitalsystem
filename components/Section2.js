@@ -46,7 +46,7 @@ const Section2 = () => {
             Medical Hospital Center
           </h1>
           <p className="text-sm text-[#075985]">
-            In this article, we'll discuss the basics of screen resolution,
+            In this article, we will discuss the basics of screen resolution,
             responsive design, and why understanding them is critical for UX
             and conversion rate optimization.
           </p>
