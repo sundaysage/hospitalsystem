@@ -1,65 +1,83 @@
 import Image from "next/image";
-import localFont from "next/font/local";
-import Nav from "../../components/Nav";
-import doc from "../../public/doc.jpg";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Nav from "../../components/Nav";
+import doc from "../../public/doc.jpg";
 import Section2 from "../../components/Section2";
 import Ourmission from "../../components/Ourmission";
 import Section2a from "../../components/Section2a";
 import Section3 from "../../components/Section3";
+
 export default function Home() {
   return (
-    <div className="bg-sky-100">
-       <motion.div
-        initial={{ opacity: 0 }} // Initial state (invisible)
-        animate={{ opacity: 1 }} // Final state (fully visible)
-        transition={{ duration: 4 }} // Animation duration
-        
+    <div className="bg-[#e0f2fe]">
+      {/* Hero Section */}
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="flex flex-col md:flex-row items-center justify-center max-w-6xl mx-auto py-16 px-6"
       >
-      <section className="sm:flex sm:w-full">
-        <div className="flex sm:w-4/5 sm:m-auto sm:justify-around sm:items-center sm:h-v-v ">
-          <div className="sm:w-2/5 flex sm:flex-col ">
-            <div>
-              <h1 className="flex font-bold sm:text-6xl">
-                The <br />
-                hospital of the <br /> Future,Today
-              </h1>
-              <p>
-                In this article well discuss the basics of screen resolution
-                respondive design amd Why understanding is critical for your UX
-                and conversion rate optimization.
-              </p>
-            </div>
+        {/* Left Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="md:w-1/2 text-center md:text-left text-[#075985] flex flex-col gap-6"
+        >
+          <h1 className="font-bold text-4xl md:text-6xl leading-tight">
+            The <br />
+            Hospital of the <br /> Future, Today
+          </h1>
+          <p className="text-sm">
+            Discover the next level of medical excellence with cutting-edge
+            technology, expert doctors, and a seamless healthcare experience.
+          </p>
 
-            <div className=" flex justify-between mt-3 w-5/6 ">
-              <Link href="/">
-                <div className=" border border-black p-1 rounded">
-                  Make an Appopointment
-                </div>
-              </Link>
-              <Link href="/">
-                <div className="border border-black p-1 rounded">
-                  Find a Doctor{" "}
-                </div>
-              </Link>
-            </div>
+          {/* Call-to-Action Buttons */}
+          <div className="flex flex-wrap justify-center md:justify-start gap-4">
+            <Link href="/">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-5 py-2 rounded-lg border border-[#075985] text-[#075985] hover:bg-[#075985] hover:text-white transition"
+              >
+                Make an Appointment
+              </motion.button>
+            </Link>
+            <Link href="/">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-5 py-2 rounded-lg border border-[#075985] text-[#075985] hover:bg-[#075985] hover:text-white transition"
+              >
+                Find a Doctor
+              </motion.button>
+            </Link>
           </div>
-          <div className="sm:w-3/6 sm:h-5/6">
-            <Image
-              alt=""
-              src={doc}
-              width=""
-              height=""
-              className="sm:w-full sm:h-full "
-            />
-          </div>
-        </div>
-      </section>{" "}
-     
-       
+        </motion.div>
 
-      </motion.div>
+        {/* Right Content (Image) */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="md:w-1/2 mt-8 md:mt-0"
+        >
+          <Image
+            alt="Medical Illustration"
+            src={doc}
+            width={500}
+            height={500}
+            className="w-full h-auto rounded-lg shadow-md"
+          />
+        </motion.div>
+      </motion.section>
+
+      {/* Other Sections */}
       <Ourmission />
       <Section2 />
       <Section2a />

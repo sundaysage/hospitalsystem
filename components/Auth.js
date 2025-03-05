@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("isLoggedIn");
     setisLoggedIn(false);
-    router.push("/login");
+    router.push("/patientlogin");
     setisLoggedIn(false);
   };
 
