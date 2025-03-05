@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../components/Auth";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const ProfileUpdate = () => {
@@ -91,7 +92,7 @@ const ProfileUpdate = () => {
           {/* Profile Image Upload */}
           <div className="flex flex-col items-center">
             {imagePreview && (
-              <img
+              <Image
                 src={imagePreview}
                 alt="Profile Preview"
                 className="w-24 h-24 rounded-full mb-2 object-cover border border-gray-300"

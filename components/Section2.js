@@ -12,7 +12,7 @@ const Section2 = () => {
       <div className="flex sm:w-5/6 sm:m-auto sm:h-3/6 sm:pb-3 justify-around">
         <div className="sm:w-2/5 sm:h-5/6">
           <Image
-            alt=""
+            alt="#"
             src=""
             width=""
             height=""
