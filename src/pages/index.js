@@ -6,8 +6,7 @@ import doc from "../../public/doc.jpg";
 import Section2 from "../../components/Section2";
 import Ourmission from "../../components/Ourmission";
 import Section2a from "../../components/Section2a";
-import Section3 from "../../components/Section3";
-
+import Footer from "../../components/Footer";
 export default function Home() {
   return (
     <div className="bg-[#e0f2fe]">
@@ -81,7 +80,7 @@ export default function Home() {
       <Ourmission />
       <Section2 />
       <Section2a />
-      <Section3 />
+      <Footer/>
     </div>
   );
 }
