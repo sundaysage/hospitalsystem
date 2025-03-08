@@ -8,17 +8,17 @@ import { BsJournalBookmark } from "react-icons/bs";
 const Section2a = () => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="bg-[#075985] w-full py-10"
+      className="bg-[#075985] w-full py-10 overflow-hidden" // Prevents overflow
     >
-      <div className="bg-[#e0f2fe] opacity-90 max-w-6xl mx-auto p-6 rounded-lg shadow-lg flex flex-col md:flex-row items-center">
+      <div className="bg-[#e0f2fe] opacity-90 max-w-full md:max-w-6xl mx-auto p-6 rounded-lg shadow-lg flex flex-col md:flex-row items-center">
         {/* Left Content */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
           className="md:w-1/2 text-center md:text-left text-[#075985] flex flex-col gap-4"
@@ -35,8 +35,8 @@ const Section2a = () => {
 
         {/* Right Content (Process Steps) */}
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
           className="md:w-1/2 grid grid-cols-2 gap-6 mt-6 md:mt-0"
@@ -49,8 +49,8 @@ const Section2a = () => {
           ].map((step, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
               className="bg-white text-[#075985] p-5 rounded-lg shadow-md flex flex-col items-center text-center"

@@ -7,21 +7,22 @@ import Section2 from "../../components/Section2";
 import Ourmission from "../../components/Ourmission";
 import Section2a from "../../components/Section2a";
 import Footer from "../../components/Footer";
+
 export default function Home() {
   return (
-    <div className="bg-[#e0f2fe]">
+    <div className="bg-[#e0f2fe] overflow-hidden"> {/* Prevents overflow */}
       {/* Hero Section */}
       <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="flex flex-col md:flex-row items-center justify-center max-w-6xl mx-auto py-16 px-6"
+        className="flex flex-col md:flex-row items-center justify-center max-w-full md:max-w-6xl mx-auto py-16 px-6"
       >
         {/* Left Content */}
         <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
           className="md:w-1/2 text-center md:text-left text-[#075985] flex flex-col gap-6"
@@ -60,8 +61,8 @@ export default function Home() {
 
         {/* Right Content (Image) */}
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
           className="md:w-1/2 mt-8 md:mt-0"
@@ -80,7 +81,7 @@ export default function Home() {
       <Ourmission />
       <Section2 />
       <Section2a />
-      <Footer/>
+      <Footer />
     </div>
   );
 }

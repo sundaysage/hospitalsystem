@@ -7,7 +7,7 @@ import doc2 from "../public/doc2.jpg";
 
 const Section2 = () => {
   return (
-    <motion.div
+    <div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
@@ -34,21 +34,20 @@ const Section2 = () => {
         </motion.div>
 
         {/* Text Section */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
+        <div
+        
           className="w-full md:w-2/5 flex flex-col gap-4 text-center md:text-left"
         >
-          <p className="font-light text-lg text-[#075985]">The Great Place of</p>
+          <p className="font-light text-lg text-[#075985]">
+            The Great Place of
+          </p>
           <h1 className="text-[#075985] font-bold text-3xl">
             Medical Hospital Center
           </h1>
           <p className="text-sm text-[#075985]">
             In this article, we will discuss the basics of screen resolution,
-            responsive design, and why understanding them is critical for UX
-            and conversion rate optimization.
+            responsive design, and why understanding them is critical for UX and
+            conversion rate optimization.
           </p>
 
           {/* Services List */}
@@ -68,29 +67,18 @@ const Section2 = () => {
               Discover
             </motion.button>
           </Link>
-        </motion.div>
+        </div>
       </div>
 
       {/* Services Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        viewport={{ once: true }}
-        className="bg-[#075985] text-white py-10 mt-10"
-      >
-        <h2 className="text-center text-3xl font-semibold mb-6">Our Services</h2>
+      <div className="bg-[#075985] text-white py-10 mt-10">
+        <h2 className="text-center text-3xl font-semibold mb-6">
+          Our Services
+        </h2>
 
         <div className="flex flex-wrap justify-center gap-6">
           {[1, 2, 3].map((_, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="bg-white text-[#075985] w-72 p-5 rounded-lg shadow-lg flex flex-col items-center"
-            >
+            <div className="bg-white text-[#075985] w-72 p-5 rounded-lg shadow-lg flex flex-col items-center">
               <Image
                 alt="Emergency Room"
                 src={doc}
@@ -103,11 +91,11 @@ const Section2 = () => {
                 A place where people with injuries or sudden illnesses receive
                 emergency treatment.
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 
