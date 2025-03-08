@@ -78,7 +78,7 @@ const Section2 = () => {
 
         <div className="flex flex-wrap justify-center gap-6">
           {[1, 2, 3].map((_, index) => (
-            <div className="bg-white text-[#075985] w-72 p-5 rounded-lg shadow-lg flex flex-col items-center">
+            <div key={index} className="bg-white text-[#075985] w-72 p-5 rounded-lg shadow-lg flex flex-col items-center">
               <Image
                 alt="Emergency Room"
                 src={doc}
