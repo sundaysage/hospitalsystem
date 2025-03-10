@@ -13,7 +13,7 @@ export default function DoctorDashboard() {
     if (!storedUser || role !== "doctor") {
       router.push("/doctor-login"); // ✅ Redirect only if user data is missing
     }
-  }, []);
+  }, [router]);
 
   return (
     <>
