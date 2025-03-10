@@ -12,7 +12,7 @@ const LoginOption = () => {
               Login as Patient
             </button>
           </Link>
-          <Link href="/doctor-login">
+          <Link href="/doctorlogin">
             <button className="w-full bg-[#075985] text-white py-2 rounded hover:bg-blue-700 transition">
               Login as Doctor
             </button>
