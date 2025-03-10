@@ -1,17 +1,26 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react";
+import Link from "next/link";
 
-const loginoption = () => {
+const LoginOption = () => {
   return (
-    <div>
-        <Link href='./patientlogin'>
-        Patient
-        </Link>
-        <Link href='./doctorlogin'>
-        Doctor
-        </Link>
+    <div className="min-h-screen flex flex-col justify-center items-center bg-[#e0f2fe]">
+      <div className="bg-white p-8 shadow-md rounded-lg text-center">
+        <h1 className="text-2xl font-bold text-[#075985] mb-4">Choose Your Login</h1>
+        <div className="flex flex-col gap-4">
+          <Link href="/patientlogin">
+            <button className="w-full bg-[#075985] text-white py-2 rounded hover:bg-blue-700 transition">
+              Login as Patient
+            </button>
+          </Link>
+          <Link href="/doctor-login">
+            <button className="w-full bg-[#075985] text-white py-2 rounded hover:bg-blue-700 transition">
+              Login as Doctor
+            </button>
+          </Link>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default loginoption
+export default LoginOption;
