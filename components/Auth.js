@@ -1,7 +1,5 @@
-import { createContext, useContext, useEffect } from "react";
-import { useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Nav from "./Nav";
 
 const AuthContext = createContext();
 
@@ -9,78 +7,62 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const [isLoggedIn, setisLoggedIn] =useState (false);
-
 
   useEffect(() => {
-    const storedLoginStatus = localStorage.getItem('isLoggedIn');
-    if (storedLoginStatus === 'true') {
-      setisLoggedIn(true);
-    }
-    else{
-      setisLoggedIn(false);
-    }
-  }, []);
-  
-  useEffect(() => {
-    // Check for token in localStorage on mount
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON?.parse(storedUser));
+    const storedRole = localStorage.getItem("userRole");
+
+    if (storedUser && storedRole) {
+      setUser(JSON.parse(storedUser)); // ✅ Ensure user persists
     }
-    setLoading(false); // Done checking for user
+    setLoading(false);
   }, []);
 
-  const login = async (userData) => {
+  const login = async (userData, role) => {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://sage-hospital.onrender.com/api/v1/auth/patient-login",
+        role === "doctor"
+          ? "https://sage-hospital.onrender.com/api/v1/auth/doctor-login"
+          : "https://sage-hospital.onrender.com/api/v1/auth/patient-login",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userData),
         }
       );
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Login failed");
       }
 
       const data = await response.json();
-      const token = data?.data?.tokens?.accessToken; // Extract token from API response
-      localStorage.setItem("token", token); // Store token securely
+      const token = data?.data?.tokens?.accessToken;
 
-      setUser(data.data); // Store user data (optional)
+      localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(data.data));
-      setisLoggedIn(true);
-      router.push("/dashboard"); // Redirect to dashboard after login
+      localStorage.setItem("userRole", role);
 
+      setUser(data.data);
+      router.push(role === "doctor" ? "/doctor/dashboard" : "/dashboard");
     } catch (error) {
-      console.error('Login Error:', error);  // Log the detailed error
-      alert(error.message); // Show the error to the user
+      console.error("Login Error:", error);
+      alert(error.message);
     } finally {
       setLoading(false);
     }
-    setisLoggedIn(true);
-    localStorage.setItem('isLoggedIn', 'true'); // Persist login state
-
   };
 
   const logout = () => {
+    localStorage.clear();
     setUser(null);
-    localStorage.removeItem("user");
-    localStorage.removeItem("isLoggedIn");
-    setisLoggedIn(false);
-    router.push("/patientlogin");
-    setisLoggedIn(false);
+    window.dispatchEvent(new Event("storage")); // ✅ Ensures immediate navbar update
+    router.push("/loginoption");
   };
 
   return (
-  
-    <AuthContext.Provider value={{ user, login, logout, loading, isLoggedIn }}>
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

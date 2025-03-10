@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../../components/Auth";
-import Navplog from "../../components/Navplog";
 import Image from "next/image";
 import Link from "next/link";
 import IDCard from "../../components/IDCard"; // ✅ Tailwind-styled ID Card
@@ -33,7 +32,6 @@ export default function Dashboard() {
   return (
     <>
       {/* ✅ Navbar */}
-      <Navplog />
 
       {/* ✅ Dashboard Content */}
       <div className="flex flex-col items-center justify-center min-h-screen bg-[#e0f2fe] p-6 pt-20">

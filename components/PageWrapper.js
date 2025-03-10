@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "./Auth";
-import Nav from "./Nav";
-import Navplog from "./Navplog";
+import PatientNav from "./PatientNav";
+import DoctorNav from "./DoctorNav";
+import LoggedOutNav from "./LoggedOutNav";
 
 const PageWrapper = ({ children }) => {
-  const { isLoggedIn } = useAuth();
+  const { user } = useAuth();
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    setRole(localStorage.getItem("userRole"));
+  }, [user]);
+
   return (
     <div>
-      {isLoggedIn ? <Navplog /> : <Nav />}
+      {role === "doctor" && <DoctorNav />}
+      {role === "patient" && <PatientNav />}
+      {!role && <LoggedOutNav />}
       <main>{children}</main>
     </div>
   );

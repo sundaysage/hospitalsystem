@@ -1,26 +1,33 @@
 import "@/styles/globals.css";
 import { AuthProvider, useAuth } from "../../components/Auth";
-import Nav from "../../components/Nav";
 import Navplog from "../../components/Navplog";
+import Nav from "../../components/Nav"; 
+import { useEffect, useState } from "react";
+import DoctorNav from "../../components/DoctorNav";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthProvider>  {/* AuthProvider wraps the ENTIRE app */}
-    <NavigationWrapper>
-
-      <Component {...pageProps} />
-
-    </NavigationWrapper>
+    <AuthProvider>
+      <NavigationWrapper>
+        <Component {...pageProps} />
+      </NavigationWrapper>
     </AuthProvider>
   );
 }
 
-//create the login that will check and replace that nav with the correct one
 function NavigationWrapper({ children }) {
-  const { isLoggedIn } = useAuth();
+  const { user } = useAuth();
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    setRole(localStorage.getItem("userRole"));
+  }, [user]);
+
   return (
     <div>
-      {isLoggedIn ? <Navplog /> : <Nav />}
+      {role === "doctor" && <DoctorNav />}
+      {role === "patient" && <Navplog />}
+      {!role && <Nav />}
       {children}
     </div>
   );

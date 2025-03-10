@@ -61,7 +61,7 @@ const NavLinks = ({ onClick }) => (
       { href: "/", label: "Home" },
       { href: "/", label: "Find Doctor" },
       { href: "/pharmacy", label: "Pharmacy" },
-      { href: "/patientlogin", label: "Login" },
+      { href: "/loginoption", label: "Login" },
       { href: "/patientreg", label: "Signup" },
     ].map(({ href, label }) => (
       <Link key={href} href={href} onClick={onClick}>
