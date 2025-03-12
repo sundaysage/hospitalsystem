@@ -61,7 +61,7 @@ const NavLinks = ({ logout, onClick }) => (
     {[
       { href: "/", label: "Home" },
       { href: "/", label: "Find Doctor" },
-      { href: "/pharmacy", label: "Pharmacy" },
+      { href: "/drugs", label: "Pharmacy" },
       { href: "/dashboard", label: "Dashboard" },
     ].map(({ href, label }) => (
       <Link key={href} href={href} onClick={onClick}>
