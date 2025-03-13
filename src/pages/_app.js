@@ -4,6 +4,7 @@ import Navplog from "../../components/Navplog";
 import Nav from "../../components/Nav"; 
 import { useEffect, useState } from "react";
 import DoctorNav from "../../components/DoctorNav";
+import 'react-big-calendar/lib/css/react-big-calendar.css'; 
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -24,7 +25,7 @@ function NavigationWrapper({ children }) {
   }, [user]);
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       {role === "doctor" && <DoctorNav />}
       {role === "patient" && <Navplog />}
       {!role && <Nav />}
