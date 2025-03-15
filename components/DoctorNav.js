@@ -88,6 +88,11 @@ const DoctorNav = () => {
             </Link>
           </li>
           <li>
+            <Link href="/doctor/calendar" className="hover:text-gray-300">
+              Calendar
+            </Link>
+          </li>
+          <li>
             <button onClick={handleLogout} className="flex items-center gap-2 hover:text-red-400">
               <FaSignOutAlt /> Logout
             </button>

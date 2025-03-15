@@ -55,14 +55,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
+  const logout = (role) => {
     localStorage.clear();
     setUser(null);
     window.dispatchEvent(new Event('storage')); // ✅ Ensures immediate navbar update
-    router.push('/loginoption');
+
+    if (role == 'doctor') {
+      router.push('/doctor/auth/login');
+    } else {
+      router.push('/loginoption');
+    }
   };
 
-  return <AuthContext.Provider value={{ user, login, logout, loading }}>{children}</AuthContext.Provider>;
+  const accessToken = () => localStorage.getItem('token');
+
+  return <AuthContext.Provider value={{ user, login, logout, accessToken, loading }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);
